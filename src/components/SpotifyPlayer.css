@@ -1,0 +1,13 @@
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button > * {
+  pointer-events: none;
+}
+
+.now-playing {
+  text-align: center;
+}
