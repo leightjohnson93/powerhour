@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
-import Tooltip from '@material-ui/core/Tooltip'
 import Spotify from 'spotify-web-api-js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SpotifyPlayer.css'
@@ -58,9 +57,6 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
 
   return (
     <>
-      <Tooltip title="Your Spotify App must be open in order for Power Hour to control the music.">
-        <FontAwesomeIcon icon="info-circle" />
-      </Tooltip>
       <h2>{name}</h2>
       <img src={song.image} alt={song.name} />
       <div className="controls">

@@ -39,7 +39,7 @@ const SpotifyContainer = ({ time, frequency, start }) => {
       accessToken: null
     })
   return (
-    <div>
+    <>
       {authentication.loggedIn ? (
         <>
           <SpotifyPlayer
@@ -53,7 +53,7 @@ const SpotifyContainer = ({ time, frequency, start }) => {
       ) : (
         <ConnectSpotify />
       )}
-    </div>
+    </>
   )
 }
 
