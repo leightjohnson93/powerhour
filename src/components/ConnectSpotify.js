@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
+import './ConnectSpotify.css'
 
 const ConnectSpotify = () => {
   function redirectUrlToSpotifyForLogin() {
@@ -29,13 +30,15 @@ const ConnectSpotify = () => {
     )
   }
   return (
-    <div className="ConnectSpotify">
+    <div className="Connect-spotify">
       <a href={redirectUrlToSpotifyForLogin()}>
         <Button variant="outlined" color="primary">
           Connect to Spotify
         </Button>
       </a>
-      <p>Connect your Spotify account so that Power Hour can control the music!</p>
+      <p>
+        Connect your Spotify account so that Power Hour can control the music!
+      </p>
     </div>
   )
 }

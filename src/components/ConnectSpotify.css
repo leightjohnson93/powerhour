@@ -1,0 +1,9 @@
+.Connect-spotify {
+  display: flex;
+  flex-direction: col;
+}
+
+.Connect-spotify p {
+  margin: 15px 25px;
+  text-align: center;
+}
