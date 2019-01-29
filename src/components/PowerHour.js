@@ -55,18 +55,17 @@ const PowerHour = props => {
         </>
       ) : (
         <>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            disabled={!totalDrinks}
-            onClick={() => {
-              setStart(true)
-              setTime(duration * 60)
-            }}
-          >
-            Start
-          </Button>
+          <h2>Welcome to Power Hour!</h2>
+          <p>
+            Be sure to sign into Spotify before starting a game because
+            authentication requires a page refresh. Select a playlist from your
+            Spotify App and Power Hour will change the song every time you need to drink!
+          </p>
+          <br />
+          <p>
+            Select a drink frequency and total duration. Make sure you have
+            enough beer!
+          </p>
           <fieldset>
             <TextField
               type="number"
@@ -89,6 +88,18 @@ const PowerHour = props => {
               onChange={handleChange}
             />
           </fieldset>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            disabled={!totalDrinks}
+            onClick={() => {
+              setStart(true)
+              setTime(duration * 60)
+            }}
+          >
+            Start
+          </Button>
         </>
       )}
       <p>Total Drinks: {frequency * duration}</p>

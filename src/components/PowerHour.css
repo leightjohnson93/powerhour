@@ -2,6 +2,7 @@ button {
   margin-top: 30px !important;
   flex: 1 1 auto;
   max-width: 364px;
+  max-height: 42px;
   width: 100%;
   margin-top: 15px !important;
   margin-bottom: 10px !important;
@@ -12,11 +13,16 @@ fieldset {
   align-items: center;
   border: none;
   flex-wrap: wrap;
-  margin: 0px;
+  margin: 10px 0;
   padding: 0px;
 }
 
 fieldset input {
   padding-right: 0px !important;
   width: 350px !important;
+}
+
+p {
+  margin: 10px 30px;
+  text-align: justify;
 }
