@@ -3,6 +3,7 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 100px 1fr;
   column-gap: 30px;
+  /* min-height: 100vh; */
 }
 
 .App-header {
@@ -30,7 +31,8 @@
     width: 100vw;
   }
   .Power-hour {
-    margin-top: 69px;
+    margin-top: 71px;
+    margin-bottom: 3px;
     width: 100vw;
   }
 }

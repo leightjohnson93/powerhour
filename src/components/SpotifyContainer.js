@@ -42,13 +42,13 @@ const SpotifyContainer = ({ time, frequency, start }) => {
     <div>
       {authentication.loggedIn ? (
         <>
-          <Button onClick={logout}>Logout</Button>
           <SpotifyPlayer
             accessToken={authentication.accessToken}
             time={time}
             frequency={frequency}
             start={start}
           />
+          <Button onClick={logout}>Logout</Button>
         </>
       ) : (
         <ConnectSpotify />
