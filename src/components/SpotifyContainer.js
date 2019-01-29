@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import ConnectSpotify from './ConnectSpotify'
 import SpotifyPlayer from './SpotifyPlayer'
 
-const SpotifyContainer = () => {
+const SpotifyContainer = ({ time, frequency, start }) => {
   const [authentication, setAuthentication] = useState({
     loggedIn: false,
     accessToken: null
@@ -43,7 +43,12 @@ const SpotifyContainer = () => {
       {authentication.loggedIn ? (
         <>
           <Button onClick={logout}>Logout</Button>
-          <SpotifyPlayer accessToken={authentication.accessToken} />
+          <SpotifyPlayer
+            accessToken={authentication.accessToken}
+            time={time}
+            frequency={frequency}
+            start={start}
+          />
         </>
       ) : (
         <ConnectSpotify />

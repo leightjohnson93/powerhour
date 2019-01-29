@@ -31,8 +31,11 @@ const ConnectSpotify = () => {
   return (
     <div className="ConnectSpotify">
       <a href={redirectUrlToSpotifyForLogin()}>
-        <Button>Connect to Spotify</Button>
+        <Button variant="outlined" color="primary">
+          Connect to Spotify
+        </Button>
       </a>
+      <p>Connect your Spotify account so that Power Hour can control the music!</p>
     </div>
   )
 }
