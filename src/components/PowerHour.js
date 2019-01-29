@@ -3,22 +3,22 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import './PowerHour.css'
 
-const PowerHour = () => {
-  const [frequency, setFrequency] = useState(1)
-  const [duration, setDuration] = useState(60)
-  const [start, setStart] = useState(false)
+const PowerHour = props => {
+  const {
+    frequency,
+    duration,
+    handleChange,
+    time,
+    setTime,
+    start,
+    setStart
+  } = props
   const [pregame, setPregame] = useState(3)
-  const [time, setTime] = useState(duration * 60 - 60 / frequency)
 
   const drinkSize = 1.5 // Ounces
   const beerSize = 12 //Ounces
   const totalDrinks = frequency * duration
   const totalBeers = (totalDrinks * drinkSize) / beerSize
-
-  const handleChange = e => {
-    const { name, value } = e.target
-    name === 'frequency' ? setFrequency(+value) : setDuration(+value)
-  }
 
   useEffect(
     () => {
@@ -27,10 +27,14 @@ const PowerHour = () => {
         timerId = setInterval(() => {
           setPregame(pregame - 1)
         }, 950)
-      } else if (start) {
+      } else if (start && time) {
+        document.title = time % 60 || 'Power Hour'
         timerId = setInterval(() => {
           setTime(time - 1)
         }, 950)
+      } else if (start && !time) {
+        setStart(false)
+        setPregame(3)
       }
       return () => clearInterval(timerId)
     },
@@ -58,7 +62,7 @@ const PowerHour = () => {
             disabled={!totalDrinks}
             onClick={() => {
               setStart(true)
-              setTime(duration * 60 - 60 / frequency)
+              setTime(duration * 60)
             }}
           >
             Start

@@ -1,10 +1,10 @@
+button {
+  margin-top: 30px !important;
+}
+
 fieldset {
   display: flex;
   align-items: center;
   border: none;
   flex-wrap: wrap;
-}
-
-fieldset > * {
-  /* width: 20px !important; */
 }

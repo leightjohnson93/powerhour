@@ -19,4 +19,18 @@
 .Power-hour {
   grid-column: 1/2;
   grid-row: 2/3;
+  display: flex;
+}
+
+@media only screen and (max-width: 900px) {
+  .App {
+    display: flex;
+  }
+  .Spotify-container {
+    width: 100vw;
+  }
+  .Power-hour {
+    margin-top: 69px;
+    width: 100vw;
+  }
 }

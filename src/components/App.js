@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
@@ -18,22 +18,36 @@ library.add(faPause)
 library.add(faForward)
 library.add(faBackward)
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <AppBar className="App-header">
-          <h2>Power Hour</h2>
-        </AppBar>
-        <Paper className="Power-hour">
-          <PowerHour />
-        </Paper>
-        <Paper className="Spotify-container">
-          <SpotifyContainer />
-        </Paper>
-      </div>
-    )
+const App = () => {
+  const [frequency, setFrequency] = useState(1)
+  const [duration, setDuration] = useState(60)
+  const [start, setStart] = useState(false)
+  const [time, setTime] = useState(duration * 60)
+  const handleChange = e => {
+    const { name, value } = e.target
+    name === 'frequency' ? setFrequency(+value) : setDuration(+value)
   }
+  return (
+    <div className="App">
+      <AppBar className="App-header">
+        <h2>Power Hour</h2>
+      </AppBar>
+      <Paper className="Power-hour">
+        <PowerHour
+          frequency={frequency}
+          duration={duration}
+          handleChange={handleChange}
+          time={time}
+          setTime={setTime}
+          start={start}
+          setStart={setStart}
+        />
+      </Paper>
+      <Paper className="Spotify-container">
+        <SpotifyContainer time={time} frequency={frequency} start={start} />
+      </Paper>
+    </div>
+  )
 }
 
 export default App

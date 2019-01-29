@@ -4,45 +4,45 @@ import Spotify from 'spotify-web-api-js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SpotifyPlayer.css'
 
-const SpotifyPlayer = ({ accessToken }) => {
+const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
   const spotifyAPI = new Spotify()
-  const [user, setUser] = useState({
-    name: 'Anonymous',
-    image: 'http://www.chugh.com/wp-content/uploads/2018/03/default_user.jpg'
-  })
+  const [name, setName] = useState('Anonymous')
   const [playing, setPlaying] = useState(false)
-  const [song, setSong] = useState({ name: null, artists: null })
+  const [song, setSong] = useState({ name: null, artists: null, image: null })
   const [skips, setSkips] = useState(0)
 
   useEffect(
     () => {
       spotifyAPI.setAccessToken(accessToken)
-      getUserInfo().then(user => setUser(user))
+      getUserInfo().then(user => setName(user))
       getPlaybackState().then(playback => {
-        const { playing, name, artists } = playback
+        const { playing, name, artists, image } = playback
         setPlaying(playing)
-        setSong({ name, artists })
+        setSong({ name, artists, image })
       })
+      if (start && !(time % (60 / frequency))) {
+        spotifyAPI.skipToNext()
+      }
     },
-    [skips]
+    [skips, time]
   )
 
   const getPlaybackState = async () => {
     const currentPlaybackState = await spotifyAPI.getMyCurrentPlaybackState()
     const { is_playing, item } = currentPlaybackState
-    const { name, artists } = item
+    const { name, artists, album } = item
+    const image = album.images[1].url
     return {
       playing: is_playing,
       name,
+      image,
       artists: artists.map(artist => artist.name).join(', ')
     }
   }
 
   const getUserInfo = async () => {
     const user = await spotifyAPI.getMe()
-    const name = user.display_name
-    const image = user.images[0].url
-    return { name, image }
+    return user.display_name
   }
   const handlePlay = () => {
     playing ? spotifyAPI.pause() : spotifyAPI.play()
@@ -57,8 +57,8 @@ const SpotifyPlayer = ({ accessToken }) => {
 
   return (
     <>
-      <img src={user.image} alt={user.name} />
-      <h2>{user.name}</h2>
+      <h2>{name}</h2>
+      <img src={song.image} alt={song.name} />
       <div className="controls">
         <Button id="previous" onClick={handleSkip}>
           <FontAwesomeIcon icon="backward" />
