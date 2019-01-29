@@ -10,13 +10,15 @@ import {
   faPlay,
   faPause,
   faForward,
-  faBackward
+  faBackward,
+  faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay)
 library.add(faPause)
 library.add(faForward)
 library.add(faBackward)
+library.add(faInfoCircle)
 
 const App = () => {
   const [frequency, setFrequency] = useState(1)

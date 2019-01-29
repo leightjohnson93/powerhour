@@ -17,6 +17,13 @@ img {
   margin: 0 20px;
 }
 
+.fa-info-circle {
+  position: relative;
+  right: -156px;
+  top: 5px;
+  font-size: 18px;
+}
+
 @media only screen and (max-width: 900px) {
   .controls {
     max-width: 350px;
