@@ -7,4 +7,11 @@ fieldset {
   align-items: center;
   border: none;
   flex-wrap: wrap;
+  margin: 0px;
+  padding: 0px;
+}
+
+fieldset input {
+  padding-right: 0px !important;
+  width: 350px !important;
 }
