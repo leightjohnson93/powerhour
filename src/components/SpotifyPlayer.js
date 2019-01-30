@@ -30,6 +30,7 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
   const getPlaybackState = async () => {
     const currentPlaybackState = await spotifyAPI.getMyCurrentPlaybackState()
     const { is_playing, item } = currentPlaybackState
+    if (!item) return { name: 'Nothing Playing' }
     const { name, artists, album } = item
     const image = album.images[1].url
     return {

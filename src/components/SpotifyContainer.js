@@ -40,6 +40,7 @@ const SpotifyContainer = ({ time, frequency, start }) => {
     })
   return (
     <>
+      <h2>Spotify Player</h2>
       {authentication.loggedIn ? (
         <>
           <SpotifyPlayer

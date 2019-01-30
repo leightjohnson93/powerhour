@@ -44,6 +44,7 @@ const PowerHour = props => {
     <>
       {start ? (
         <>
+        <h1>Game in Progress</h1>
           <h2>
             {pregame
               ? 'GET READY'
