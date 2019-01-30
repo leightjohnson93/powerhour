@@ -1,0 +1,8 @@
+.player-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-input button {
+  height: 100px;
+}

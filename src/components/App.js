@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
 import SpotifyContainer from './SpotifyContainer'
 import PowerHour from './PowerHour'
+import Players from './Players'
 import './App.css'
 
 import {
@@ -11,7 +12,7 @@ import {
   faPause,
   faForward,
   faBackward,
-  faInfoCircle
+  faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay)
@@ -47,6 +48,9 @@ const App = () => {
       </Paper>
       <Paper className="Spotify-container">
         <SpotifyContainer time={time} frequency={frequency} start={start} />
+      </Paper>
+      <Paper className="Players">
+        <Players />
       </Paper>
     </div>
   )

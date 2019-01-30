@@ -8,17 +8,19 @@ button {
   margin-bottom: 10px !important;
 }
 
-fieldset {
+.rules-input {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  border: none;
-  flex-wrap: wrap;
   margin: 10px 0;
   padding: 0px;
 }
 
-fieldset input {
+input {
   padding-right: 0px !important;
+}
+
+.rules-input input {
   width: 350px !important;
 }
 
@@ -26,5 +28,3 @@ p {
   margin: 10px 30px;
   text-align: justify;
 }
-
-
