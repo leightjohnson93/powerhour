@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import './SpotifyContainer.css'
 import Button from '@material-ui/core/Button'
 import ConnectSpotify from './ConnectSpotify'
 import SpotifyPlayer from './SpotifyPlayer'
