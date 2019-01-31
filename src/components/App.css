@@ -42,12 +42,20 @@ div {
   .App {
     display: flex;
   }
+  .App > div {
+    box-shadow: none !important;
+    border-bottom: 1px #3f51b5 solid;
+    margin: 0px;
+  }
   .Spotify-container {
     width: 100vw;
   }
   .Power-hour {
     margin-top: 71px;
     margin-bottom: 3px;
+    width: 100vw;
+  }
+  .PLayers {
     width: 100vw;
   }
 }
