@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import getRandomEmoji from '../emojis'
 import './Players.css'
 
 const Players = () => {
@@ -12,14 +14,24 @@ const Players = () => {
 
   const handleAdd = e => {
     e.preventDefault()
-    players.push(newPlayer)
+    console.log(createPlayer())
+    players.push(createPlayer())
     setPlayers(players)
     setNewPlayer('')
   }
+
+  const createPlayer = () =>
+    `${
+      newPlayer.toLowerCase().includes('alex') ||
+      newPlayer.toLowerCase().includes('fig')
+        ? '💩'
+        : getRandomEmoji()
+    } ${newPlayer}`
+
   return (
     <div>
       <h2>Players</h2>
-      <form className="player-input">
+      <form className="player-input" autoComplete="off">
         <TextField
           type="text"
           name="name"
@@ -39,9 +51,21 @@ const Players = () => {
           Add
         </Button>
       </form>
-      <List>
+      <List className="players">
         {players.map(player => (
-          <ListItemText key={player} primary={player} />
+          <ListItem key={player} className="player">
+            <ListItemIcon>
+              <span>{player.slice(0, 2)}</span>
+            </ListItemIcon>
+            <ListItemText primary={player.slice(2)} />
+            <ListItemIcon
+              onClick={() =>
+                setPlayers(players.filter(name => player !== name))
+              }
+            >
+              <Button>&times;</Button>
+            </ListItemIcon>
+          </ListItem>
         ))}
       </List>
     </div>

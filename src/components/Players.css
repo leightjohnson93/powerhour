@@ -4,5 +4,39 @@
 }
 
 .player-input button {
-  height: 100px;
+  height: 42;
+  margin-bottom: 25px !important;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  border: 1px #3f51b5 solid !important;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 20px !important;
+}
+
+.players div {
+  padding: 0px;
+}
+
+.players span {
+  color: rgba(0, 0, 0, 1);
+}
+
+.players:empty {
+  border: none !important;
+}
+
+.player {
+  padding-right: 0px !important;
+}
+
+.player button {
+  margin-right: 0px;
+  margin-left: 20px;
+  padding-right: 0px;
+  padding-left: 0px;
+  border-radius: 100px;
 }
