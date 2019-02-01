@@ -8,16 +8,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import getRandomEmoji from '../emojis'
 import './Players.css'
 
-const Players = () => {
+const Players = ({ start }) => {
   const [newPlayer, setNewPlayer] = useState('')
   const [players, setPlayers] = useState([])
 
   const handleAdd = e => {
     e.preventDefault()
-    console.log(createPlayer())
-    players.push(createPlayer())
-    setPlayers(players)
-    setNewPlayer('')
+    const playerName = createPlayer()
+    if (playerName.length > 5) {
+      players.push(playerName)
+      setPlayers(players)
+      setNewPlayer('')
+    }
   }
 
   const createPlayer = () =>
@@ -26,7 +28,13 @@ const Players = () => {
       newPlayer.toLowerCase().includes('fig')
         ? '💩'
         : getRandomEmoji()
-    } ${newPlayer}`
+    } ${newPlayer} ${start ? '*' : ''}`
+
+  const latePlayers = () => {
+    for (let player of players) {
+      if (player.includes('*')) return <p>*Player added after Start of Game</p>
+    }
+  }
 
   return (
     <div>
@@ -34,11 +42,11 @@ const Players = () => {
       <form className="player-input" autoComplete="off">
         <TextField
           type="text"
-          name="name"
-          label="name"
-          placeholder="name"
+          label="Name"
+          placeholder={start ? 'Game In Progress' : ' Name'}
           variant="outlined"
           margin="normal"
+          q
           value={newPlayer}
           onChange={e => setNewPlayer(e.target.value)}
         />
@@ -63,11 +71,16 @@ const Players = () => {
                 setPlayers(players.filter(name => player !== name))
               }
             >
-              <Button>&times;</Button>
+              <Button>
+                <span role="img" aria-label="delete">
+                  ❌
+                </span>
+              </Button>
             </ListItemIcon>
           </ListItem>
         ))}
       </List>
+      {latePlayers()}
     </div>
   )
 }

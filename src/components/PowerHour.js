@@ -19,6 +19,7 @@ const PowerHour = props => {
   const beerSize = 12 //Ounces
   const totalDrinks = frequency * duration
   const totalBeers = (totalDrinks * drinkSize) / beerSize
+  const drinksConsumed = totalDrinks - time / (60 / frequency)
 
   useEffect(
     () => {
@@ -46,12 +47,11 @@ const PowerHour = props => {
         <>
           <h1>Game in Progress</h1>
           <h2>
-            {pregame
-              ? 'GET READY'
-              : `Drinks: ${Math.floor(
-                  totalDrinks - time / (60 / frequency)
-                )} 🍺`}
+            {pregame ? 'GET READY' : `Drinks: ${Math.floor(drinksConsumed)} 🍺`}
           </h2>
+          <p>
+            {`${Math.round((drinksConsumed / 8) * 100) / 100} Beers consumed`}
+          </p>
           <h2>{pregame || time % (60 / frequency)}</h2>
         </>
       ) : (

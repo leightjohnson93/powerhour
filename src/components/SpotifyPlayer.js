@@ -89,9 +89,9 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
         <FormControlLabel
           control={
             <Checkbox
+              value="soundEffect"
               checked={soundEffect}
               onChange={() => setSoundEffect(!soundEffect)}
-              value="gilad"
               color="primary"
             />
           }

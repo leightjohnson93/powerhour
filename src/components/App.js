@@ -12,7 +12,7 @@ import {
   faPause,
   faForward,
   faBackward,
-  faInfoCircle,
+  faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay)
@@ -50,7 +50,7 @@ const App = () => {
         <SpotifyContainer time={time} frequency={frequency} start={start} />
       </Paper>
       <Paper className="Players">
-        <Players />
+        <Players start={start} />
       </Paper>
     </div>
   )
