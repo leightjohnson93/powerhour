@@ -20,6 +20,7 @@ const PowerHour = props => {
   const totalDrinks = frequency * duration
   const totalBeers = (totalDrinks * drinkSize) / beerSize
   const drinksConsumed = totalDrinks - time / (60 / frequency)
+  const beersConsumed = (((drinksConsumed / 8) * 100) / 100).toFixed(2)
 
   useEffect(
     () => {
@@ -49,9 +50,7 @@ const PowerHour = props => {
           <h2>
             {pregame ? 'GET READY' : `Drinks: ${Math.floor(drinksConsumed)} 🍺`}
           </h2>
-          <p>
-            {`${Math.round((drinksConsumed / 8) * 100) / 100} Beers consumed`}
-          </p>
+          <p>{`${beersConsumed} beers consumed`}</p>
           <h2>{pregame || time % (60 / frequency)}</h2>
         </>
       ) : (
@@ -95,7 +94,8 @@ const PowerHour = props => {
               color="primary"
               size="large"
               disabled={!totalDrinks}
-              onClick={() => {
+              onClick={e => {
+                e.preventDefault()
                 setStart(true)
                 setTime(duration * 60)
               }}
