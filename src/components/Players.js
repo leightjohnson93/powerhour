@@ -46,7 +46,6 @@ const Players = ({ start }) => {
           placeholder={start ? 'Game In Progress' : ' Name'}
           variant="outlined"
           margin="normal"
-          q
           value={newPlayer}
           onChange={e => setNewPlayer(e.target.value)}
         />
