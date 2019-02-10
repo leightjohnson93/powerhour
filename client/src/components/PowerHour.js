@@ -50,7 +50,7 @@ const PowerHour = props => {
           <h2>
             {pregame ? 'GET READY' : `Drinks: ${Math.floor(drinksConsumed)} 🍺`}
           </h2>
-          <p>{`${beersConsumed} beers consumed`}</p>
+          <p>{`${beersConsumed} beers drank`}</p>
           <h2>{pregame || time % (60 / frequency)}</h2>
         </>
       ) : (
