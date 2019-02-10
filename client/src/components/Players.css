@@ -5,7 +5,6 @@
 
 .player-input button {
   height: 42;
-  margin-bottom: 25px !important;
 }
 
 .players {
@@ -15,14 +14,17 @@
   border-radius: 4px;
   width: 90%;
   margin-bottom: 20px !important;
+  margin-top: 25px !important;
 }
 
 .players div {
   padding: 0px;
 }
 
-.players span {
+.emoji span {
   color: rgba(0, 0, 0, 1);
+  min-width: 20px;
+  font-weight: bold;
 }
 
 .players:empty {
@@ -39,4 +41,17 @@
   padding-right: 0px;
   padding-left: 0px;
   border-radius: 100px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.login label {
+  margin-left: 20px;
+}
+
+.login > div {
+  margin-bottom: 20px;
 }
