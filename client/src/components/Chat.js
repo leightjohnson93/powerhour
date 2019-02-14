@@ -27,38 +27,16 @@ const CREATE_CHAT_MUTATION = gql`
 `
 
 const Chat = () => {
+  let messagesEnd
   const [from, setFrom] = useState('')
   const [content, setContent] = useState('')
 
-  // useEffect(() => subscribeToNewChats())
+  useEffect(
+    () => messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' }),
+    [content]
+  )
 
-  //   const subscribeToNewChats = () => {
-  //     subscribeToMore({
-  //       document: gql`
-  //         subscription {
-  //           Chat(filter: { mutation_in: [CREATED] }) {
-  //             node {
-  //               id
-  //               from
-  //               content
-  //               createdAt
-  //             }
-  //           }
-  //         }
-  //       `,
-  //       updateQuery: (previous, { subscriptionData }) => {
-  //         const newChatLinks = [
-  //           ...previous.allChats,
-  //           subscriptionData.data.Chat.node
-  //         ]
-  //         const result = {
-  //           ...previous,
-  //           allChats: newChatLinks
-  //         }
-  //         return result
-  //       }
-  //     })
-  //   }
+  useEffect(() => setFrom(localStorage.getItem('from')), [])
 
   return (
     <div>
@@ -75,8 +53,9 @@ const Chat = () => {
         {({ data, error, loading, subscribeToMore }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error: {error.message}</p>
+          messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' })
           return (
-            <div>
+            <div className="Chat-box">
               {uniqBy(data.allChats, 'id').map(message => (
                 <ChatBox
                   key={message.id}
@@ -110,6 +89,13 @@ const Chat = () => {
                   }}
                 />
               ))}
+              <div
+                key="messagesEnd"
+                style={{ float: 'left', clear: 'both' }}
+                ref={el => {
+                  messagesEnd = el
+                }}
+              />
             </div>
           )
         }}
@@ -126,12 +112,18 @@ const Chat = () => {
               placeholder="Your Message..."
               onKeyPress={e => {
                 if (e.key === 'Enter') {
-                  !from && setFrom('anonymous')
-                  setTimeout(() => {
+                  if (!from) {
+                    setFrom('anonymous')
+                    setTimeout(() => {
+                      createChat()
+                      setContent('')
+                      setFrom('')
+                    }, 50)
+                  } else {
                     createChat()
                     setContent('')
-                    setFrom('')
-                  }, 50)
+                    localStorage.setItem('from', from)
+                  }
                 }
               }}
             />

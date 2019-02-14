@@ -55,3 +55,9 @@
 .login > div {
   margin-bottom: 20px;
 }
+
+.Chat-box {
+  overflow: scroll;
+  max-height: 400px;
+  width: 100%;
+}

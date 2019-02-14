@@ -1,0 +1,3 @@
+targets:
+  powerhour: shared-us-west-2/cjs487hob3xfz0102pbvwvpje
+  default: powerhour

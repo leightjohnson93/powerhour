@@ -3,6 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Offline from './Offline'
 import Online from './Online'
+import Chat from './Chat'
 import './Players.css'
 
 const Players = ({ start }) => {
@@ -22,7 +23,7 @@ const Players = ({ start }) => {
         }
         label="Play Online"
       />
-      {playOnline ? <Online /> : <Offline start={start} />}
+      {playOnline ? <Chat /> : <Offline start={start} />}
     </div>
   )
 }
