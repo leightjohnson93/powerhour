@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: 80px 1fr 1fr;
   column-gap: 20px;
   align-items: stretch;
   justify-items: stretch;
@@ -30,6 +30,11 @@
   grid-column: 1/2;
   grid-row: 2/3;
   margin-left: 10px;
+}
+
+.Chat {
+  grid-column: 1/2;
+  grid-row: 3/4;
 }
 
 div {

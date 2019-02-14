@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar'
 import SpotifyContainer from './SpotifyContainer'
 import PowerHour from './PowerHour'
 import Players from './Players'
+import Chat from './Chat'
 import './App.css'
 
 import {
@@ -51,6 +52,9 @@ const App = () => {
       </Paper>
       <Paper className="Players">
         <Players start={start} />
+      </Paper>
+      <Paper className="Chat">
+        <Chat />
       </Paper>
     </div>
   )

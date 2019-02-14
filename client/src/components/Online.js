@@ -5,6 +5,7 @@ import { AUTH_TOKEN } from '../constants'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+import Button from '@material-ui/core/Button'
 import Login from './Login'
 
 const USERS_QUERY = gql`
@@ -39,7 +40,18 @@ const Online = () => {
           )
         }}
       </Query>
-      {!authToken && <Login setAuthToken={setAuthToken} />}
+      {authToken ? (
+        <Button
+          onClick={() => {
+            setAuthToken('')
+            localStorage.removeItem(AUTH_TOKEN)
+          }}
+        >
+          Logout
+        </Button>
+      ) : (
+        <Login setAuthToken={setAuthToken} />
+      )}
     </>
   )
 }

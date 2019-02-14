@@ -1,10 +1,11 @@
 {
-  "projects": {
-    "powerhour": {
-      "schemaPath": "schema.graphql",
-      "extensions": {
-        "endpoints": {
-          "dev": "http://localhost:4000"
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dev": {
+        "url": "https://api.graph.cool/simple/v1/cjs487hob3xfz0102pbvwvpje",
+        "subscription": {
+          "url": "wss://subscriptions.us-west-2.graph.cool/v1/cjs487hob3xfz0102pbvwvpje"
         }
       }
     }
