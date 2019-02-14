@@ -6,7 +6,7 @@ import Chat from './Chat'
 import './Players.css'
 
 const Players = ({ start }) => {
-  const [playOnline, setPlayOnline] = useState(false)
+  const [playOnline, setPlayOnline] = useState(true)
 
   return (
     <div>
@@ -20,7 +20,7 @@ const Players = ({ start }) => {
             color="primary"
           />
         }
-        label="Play Online"
+        label="Online"
       />
       {playOnline ? <Chat /> : <Offline start={start} />}
     </div>
