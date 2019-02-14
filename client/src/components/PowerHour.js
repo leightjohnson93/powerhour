@@ -22,26 +22,23 @@ const PowerHour = props => {
   const drinksConsumed = totalDrinks - time / (60 / frequency)
   const beersConsumed = (((drinksConsumed / 8) * 100) / 100).toFixed(2)
 
-  useEffect(
-    () => {
-      let timerId = null
-      if (start && pregame) {
-        timerId = setInterval(() => {
-          setPregame(pregame - 1)
-        }, 950)
-      } else if (start && time) {
-        document.title = time % 60 || 'Power Hour'
-        timerId = setInterval(() => {
-          setTime(time - 1)
-        }, 950)
-      } else if (start && !time) {
-        setStart(false)
-        setPregame(3)
-      }
-      return () => clearInterval(timerId)
-    },
-    [start, pregame, time]
-  )
+  useEffect(() => {
+    let timerId = null
+    if (start && pregame) {
+      timerId = setInterval(() => {
+        setPregame(pregame - 1)
+      }, 950)
+    } else if (start && time) {
+      document.title = time % 60 || 'Power Hour'
+      timerId = setInterval(() => {
+        setTime(time - 1)
+      }, 950)
+    } else if (start && !time) {
+      setStart(false)
+      setPregame(3)
+    }
+    return () => clearInterval(timerId)
+  }, [start, pregame, time])
   return (
     <>
       {start ? (
@@ -51,7 +48,7 @@ const PowerHour = props => {
             {pregame ? 'GET READY' : `Drinks: ${Math.floor(drinksConsumed)} 🍺`}
           </h2>
           <p>{`${beersConsumed} beers drank`}</p>
-          <h2>{pregame || time % (60 / frequency)}</h2>
+          <h2>{pregame || Math.round(time % (60 / frequency))}</h2>
         </>
       ) : (
         <>
@@ -93,7 +90,7 @@ const PowerHour = props => {
               variant="contained"
               color="primary"
               size="large"
-              disabled={!totalDrinks}
+              disabled={!totalDrinks || frequency <= 0 || time <= 0}
               onClick={e => {
                 e.preventDefault()
                 setStart(true)
