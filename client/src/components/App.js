@@ -32,7 +32,7 @@ const App = () => {
   }
   return (
     <div className="App">
-      <AppBar className="App-header">
+      <AppBar className="App-header" position="absolute">
         <h2>Power Hour</h2>
       </AppBar>
       <Paper className="Power-hour">
