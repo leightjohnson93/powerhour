@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import uniqBy from 'lodash.uniqby'
-import { Query, Mutation, Subscription, subscribeToMore } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import TextField from '@material-ui/core/TextField'
 import ChatBox from './ChatBox'
 
@@ -39,9 +39,9 @@ const Chat = () => {
   useEffect(() => setFrom(localStorage.getItem('from')), [])
 
   return (
-    <div>
+    <>
       <TextField
-        type="textarea"
+        type="text"
         label="Name"
         placeholder={'Enter your name'}
         variant="outlined"
@@ -106,6 +106,8 @@ const Chat = () => {
           if (error) return <p>Error: {error.message}</p>
           return (
             <TextField
+              className="content"
+              multiline
               value={content}
               onChange={e => setContent(e.target.value)}
               type="text"
@@ -130,7 +132,7 @@ const Chat = () => {
           )
         }}
       </Mutation>
-    </div>
+    </>
   )
 }
 

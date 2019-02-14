@@ -7,10 +7,9 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloLink, split } from 'apollo-client-preset'
+import { split } from 'apollo-client-preset'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import { AUTH_TOKEN } from './constants'
 
 const wsLink = new WebSocketLink({
   uri: 'wss://subscriptions.us-west-2.graph.cool/v1/cjs487hob3xfz0102pbvwvpje',

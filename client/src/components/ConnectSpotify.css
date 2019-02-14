@@ -6,3 +6,7 @@
 .Connect-spotify a {
   text-decoration: none;
 }
+
+.Connect-spotify p {
+  margin: 10 30px 0;
+}
