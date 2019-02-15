@@ -3,11 +3,13 @@ import gql from 'graphql-tag'
 import uniqBy from 'lodash.uniqby'
 import { Query, Mutation } from 'react-apollo'
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
 import ChatBox from './ChatBox'
 
 const ALL_CHATS_QUERY = gql`
-  query ALL_CHATS_QUERY {
-    allChats {
+  query ALL_CHATS_QUERY($last: Int, $skip: Int) {
+    allChats(last: $last, skip: $skip) {
       id
       createdAt
       from
@@ -30,12 +32,12 @@ const Chat = () => {
   let messagesEnd
   const [from, setFrom] = useState('')
   const [content, setContent] = useState('')
+  const [last, setLast] = useState(10)
 
   useEffect(
     () => messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' }),
     [content]
   )
-
   useEffect(() => setFrom(localStorage.getItem('from')), [])
 
   return (
@@ -49,13 +51,14 @@ const Chat = () => {
         value={from}
         onChange={e => setFrom(e.target.value)}
       />
-      <Query query={ALL_CHATS_QUERY}>
+      <Query query={ALL_CHATS_QUERY} variables={{ last }}>
         {({ data, error, loading, subscribeToMore }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error: {error.message}</p>
           messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' })
           return (
             <div className="Chat-box">
+              <Button onClick={() => setLast(last + 10)}>More Messages</Button>
               {uniqBy(data.allChats, 'id').map(message => (
                 <ChatBox
                   key={message.id}
