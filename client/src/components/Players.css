@@ -57,8 +57,8 @@
 }
 
 .Chat-box {
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: auto;
   max-height: Calc(100vh - 366px);
   width: 100%;
   display: flex;
@@ -68,7 +68,6 @@
 
 .Chat-box > div {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 30px;

@@ -103,7 +103,10 @@ const Chat = () => {
           )
         }}
       </Query>
-      <Mutation mutation={CREATE_CHAT_MUTATION} variables={{ content, from }}>
+      <Mutation
+        mutation={CREATE_CHAT_MUTATION}
+        variables={{ content: content.trim(), from }}
+      >
         {(createChat, { loading, error }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error: {error.message}</p>
