@@ -11,6 +11,7 @@ button > * {
 .now-playing {
   text-align: center;
   margin: 0 30px;
+  align-items: normal;
 }
 
 .now-playing p {
@@ -26,6 +27,16 @@ img {
   right: -156px;
   top: 5px;
   font-size: 18px;
+}
+
+.slider {
+  margin: 50px;
+  display: block;
+}
+
+.slider div {
+  width: 100px !important;
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 900px) {

@@ -11,7 +11,7 @@ const PowerHour = props => {
     time,
     setTime,
     start,
-    setStart
+    setStart,
   } = props
   const [pregame, setPregame] = useState(3)
 
@@ -29,7 +29,7 @@ const PowerHour = props => {
         setPregame(pregame - 1)
       }, 950)
     } else if (start && time) {
-      document.title = time % 60 || 'Power Hour'
+      document.title = time % (60 / frequency) || 'Power Hour'
       timerId = setInterval(() => {
         setTime(time - 1)
       }, 950)

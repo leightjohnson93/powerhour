@@ -3,6 +3,7 @@ import soundFile from '../dj-airhorn.mp3'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
 import Spotify from 'spotify-web-api-js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SpotifyPlayer.css'
@@ -14,25 +15,24 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
   const [song, setSong] = useState({ name: null, artists: null, image: null })
   const [skips, setSkips] = useState(0)
   const [soundEffect, setSoundEffect] = useState(false)
+  const [shuffle, setShuffle] = useState(false)
 
   const audio = new Audio(soundFile)
 
-  useEffect(
-    () => {
-      spotifyAPI.setAccessToken(accessToken)
-      getUserInfo().then(user => setName(user))
-      getPlaybackState().then(playback => {
-        const { playing, name, artists, image } = playback
-        setPlaying(playing)
-        setSong({ name, artists, image })
-      })
-      if (start && !(time % (60 / frequency))) {
-        spotifyAPI.skipToNext()
-        if (soundEffect) audio.play()
-      }
-    },
-    [skips, time]
-  )
+  useEffect(() => {
+    spotifyAPI.setAccessToken(accessToken)
+    getUserInfo().then(user => setName(user))
+    getPlaybackState().then(playback => {
+      const { playing, name, artists, image } = playback
+      setPlaying(playing)
+      setSong({ name, artists, image })
+    })
+    spotifyAPI.setShuffle(shuffle, {})
+    if (start && !(time % (60 / frequency))) {
+      spotifyAPI.skipToNext()
+      if (soundEffect) audio.play()
+    }
+  }, [skips, time, shuffle])
 
   const getPlaybackState = async () => {
     const currentPlaybackState = await spotifyAPI.getMyCurrentPlaybackState()
@@ -86,17 +86,30 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
       <div className="now-playing">
         <h3>{song.name}</h3>
         <p>{song.artists}</p>
-        <FormControlLabel
-          control={
-            <Checkbox
-              value="soundEffect"
-              checked={soundEffect}
-              onChange={() => setSoundEffect(!soundEffect)}
-              color="primary"
-            />
-          }
-          label="Sound Effect on Next"
-        />
+        <FormControl>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="soundEffect"
+                checked={soundEffect}
+                onChange={() => setSoundEffect(!soundEffect)}
+                color="primary"
+              />
+            }
+            label="Sound Effect on Next"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="shuffle"
+                checked={shuffle}
+                onChange={() => setShuffle(!shuffle)}
+                color="primary"
+              />
+            }
+            label="Shuffle Playlist"
+          />
+        </FormControl>
       </div>
     </>
   )
