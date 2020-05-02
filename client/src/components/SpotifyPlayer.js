@@ -19,20 +19,23 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
 
   const audio = new Audio(soundFile)
 
-  useEffect(() => {
-    spotifyAPI.setAccessToken(accessToken)
-    getUserInfo().then(user => setName(user))
-    getPlaybackState().then(playback => {
-      const { playing, name, artists, image } = playback
-      setPlaying(playing)
-      setSong({ name, artists, image })
-    })
-    spotifyAPI.setShuffle(shuffle, {})
-    if (start && !(time % (60 / frequency))) {
-      spotifyAPI.skipToNext()
-      if (soundEffect) audio.play()
-    }
-  }, [skips, time, shuffle])
+  useEffect(
+    () => {
+      spotifyAPI.setAccessToken(accessToken)
+      getUserInfo().then((user) => setName(user))
+      getPlaybackState().then((playback) => {
+        const { playing, name, artists, image } = playback
+        setPlaying(playing)
+        setSong({ name, artists, image })
+      })
+      spotifyAPI.setShuffle(shuffle, {})
+      if (start && !(time % (60 / frequency))) {
+        spotifyAPI.skipToNext()
+        if (soundEffect) audio.play()
+      }
+    },
+    [skips, time, shuffle]
+  )
 
   const getPlaybackState = async () => {
     const currentPlaybackState = await spotifyAPI.getMyCurrentPlaybackState()
@@ -44,7 +47,7 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
       playing: is_playing,
       name,
       image,
-      artists: artists.map(artist => artist.name).join(', ')
+      artists: artists.map((artist) => artist.name).join(', '),
     }
   }
 
@@ -56,7 +59,7 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
     playing ? spotifyAPI.pause() : spotifyAPI.play()
     setPlaying(!playing)
   }
-  const handleSkip = async e => {
+  const handleSkip = async (e) => {
     const { id } = e.target
     id === 'next' ? spotifyAPI.skipToNext() : spotifyAPI.skipToPrevious()
     if (soundEffect) audio.play()
@@ -73,11 +76,7 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
           <FontAwesomeIcon icon="backward" />
         </Button>
         <Button onClick={handlePlay}>
-          {playing ? (
-            <FontAwesomeIcon icon="pause" />
-          ) : (
-            <FontAwesomeIcon icon="play" />
-          )}
+          {playing ? <FontAwesomeIcon icon="pause" /> : <FontAwesomeIcon icon="play" />}
         </Button>
         <Button id="next" onClick={handleSkip}>
           <FontAwesomeIcon icon="forward" />

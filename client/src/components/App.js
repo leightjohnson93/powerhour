@@ -12,7 +12,7 @@ import {
   faPause,
   faForward,
   faBackward,
-  faInfoCircle
+  faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay)
@@ -26,9 +26,9 @@ const App = () => {
   const [duration, setDuration] = useState(60)
   const [start, setStart] = useState(false)
   const [time, setTime] = useState(duration * 60)
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target
-    name === 'frequency' ? setFrequency(+value) : setDuration(+value)
+    name === 'frequency' ? setFrequency(value) : setDuration(value)
   }
   return (
     <div className="App">

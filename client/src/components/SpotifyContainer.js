@@ -6,14 +6,14 @@ import SpotifyPlayer from './SpotifyPlayer'
 const SpotifyContainer = ({ time, frequency, start }) => {
   const [authentication, setAuthentication] = useState({
     loggedIn: false,
-    accessToken: null
+    accessToken: null,
   })
   useEffect(() => {
     const accessToken = checkUrlForSpotifyAccessToken()
     if (accessToken) {
       setAuthentication({ loggedIn: true, accessToken })
     }
-  }, {})
+  }, [])
 
   const checkUrlForSpotifyAccessToken = () => {
     const params = getHashParams()
@@ -35,7 +35,7 @@ const SpotifyContainer = ({ time, frequency, start }) => {
   const logout = () =>
     setAuthentication({
       loggedIn: false,
-      accessToken: null
+      accessToken: null,
     })
   return (
     <>

@@ -34,10 +34,7 @@ const Chat = () => {
   const [content, setContent] = useState('')
   const [last, setLast] = useState(10)
 
-  useEffect(
-    () => messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' }),
-    [content]
-  )
+  useEffect(() => messagesEnd && messagesEnd.scrollIntoView({ behavior: 'smooth' }), [content])
   useEffect(() => setFrom(localStorage.getItem('from')), [])
 
   return (
@@ -48,8 +45,8 @@ const Chat = () => {
         placeholder={'Enter your name'}
         variant="outlined"
         margin="normal"
-        value={from}
-        onChange={e => setFrom(e.target.value)}
+        value={from || ''}
+        onChange={(e) => setFrom(e.target.value)}
       />
       <Query query={ALL_CHATS_QUERY} variables={{ last }}>
         {({ data, error, loading, subscribeToMore }) => {
@@ -59,7 +56,7 @@ const Chat = () => {
           return (
             <div className="Chat-box">
               <Button onClick={() => setLast(last + 10)}>More Messages</Button>
-              {uniqBy(data.allChats, 'id').map(message => (
+              {uniqBy(data.allChats, 'id').map((message) => (
                 <ChatBox
                   key={message.id}
                   message={message}
@@ -78,16 +75,13 @@ const Chat = () => {
                         }
                       `,
                       updateQuery: (previous, { subscriptionData }) => {
-                        const newChatLinks = [
-                          ...previous.allChats,
-                          subscriptionData.data.Chat.node
-                        ]
+                        const newChatLinks = [...previous.allChats, subscriptionData.data.Chat.node]
                         const result = {
                           ...previous,
-                          allChats: newChatLinks
+                          allChats: newChatLinks,
                         }
                         return result
-                      }
+                      },
                     })
                   }}
                 />
@@ -95,7 +89,7 @@ const Chat = () => {
               <div
                 key="messagesEnd"
                 style={{ float: 'left', clear: 'both' }}
-                ref={el => {
+                ref={(el) => {
                   messagesEnd = el
                 }}
               />
@@ -103,10 +97,7 @@ const Chat = () => {
           )
         }}
       </Query>
-      <Mutation
-        mutation={CREATE_CHAT_MUTATION}
-        variables={{ content: content.trim(), from }}
-      >
+      <Mutation mutation={CREATE_CHAT_MUTATION} variables={{ content: content.trim(), from }}>
         {(createChat, { loading, error }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error: {error.message}</p>
@@ -115,11 +106,11 @@ const Chat = () => {
               className="content"
               multiline
               value={content}
-              onChange={e => setContent(e.target.value)}
+              onChange={(e) => setContent(e.target.value.replace('\n', '').replace('\r', ''))}
               type="text"
               placeholder="Your Message..."
-              onKeyPress={e => {
-                if (e.key === 'Enter') {
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && content.trim()) {
                   if (!from) {
                     setFrom('anonymous')
                     setTimeout(() => {
