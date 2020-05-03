@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import soundFile from '../dj-airhorn.mp3'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
+import Slider from '@material-ui/core/Slider'
+import Grid from '@material-ui/core/Grid'
+import VolumeDown from '@material-ui/icons/VolumeDown'
+import VolumeUp from '@material-ui/icons/VolumeUp'
 import Spotify from 'spotify-web-api-js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './SpotifyPlayer.css'
@@ -16,8 +21,15 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
   const [skips, setSkips] = useState(0)
   const [soundEffect, setSoundEffect] = useState(false)
   const [shuffle, setShuffle] = useState(false)
+  const [volume, setVolume] = useState(0.3)
+  const [audio] = useState(new Audio(soundFile))
 
-  const audio = new Audio(soundFile)
+  useEffect(
+    () => {
+      audio.volume = volume
+    },
+    [volume]
+  )
 
   useEffect(
     () => {
@@ -89,17 +101,6 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
           <FormControlLabel
             control={
               <Checkbox
-                value="soundEffect"
-                checked={soundEffect}
-                onChange={() => setSoundEffect(!soundEffect)}
-                color="primary"
-              />
-            }
-            label="Sound Effect on Next"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
                 value="shuffle"
                 checked={shuffle}
                 onChange={() => setShuffle(!shuffle)}
@@ -108,7 +109,32 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
             }
             label="Shuffle Playlist"
           />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="soundEffect"
+                checked={soundEffect}
+                onChange={() => setSoundEffect(!soundEffect)}
+                color="primary"
+              />
+            }
+            label="Sound Effect"
+          />
         </FormControl>
+        {soundEffect && (
+          <Grid container spacing={2}>
+            <Grid item xs>
+              <Slider
+                style={{ width: 200 }}
+                value={volume}
+                onChange={(e, newVolume) => setVolume(newVolume)}
+                max={1}
+                min={0}
+                step={0.001}
+              />
+            </Grid>
+          </Grid>
+        )}
       </div>
     </>
   )

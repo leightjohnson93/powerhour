@@ -4,7 +4,6 @@ import uniqBy from 'lodash.uniqby'
 import { Query, Mutation } from 'react-apollo'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-
 import ChatBox from './ChatBox'
 
 const ALL_CHATS_QUERY = gql`
