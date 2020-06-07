@@ -23,7 +23,7 @@ const PowerHour = (props) => {
     () => {
       let timerId = null
       if (start && time > 0) {
-        document.title = (time - 1) % (60 / frequency) || 'PowerHour'
+        document.title = (time - 1) % (60 / frequency) || 'Power Hour'
         timerId = setInterval(() => {
           setTime(time - 1)
         }, 950)

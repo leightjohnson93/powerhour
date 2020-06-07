@@ -10,16 +10,17 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { split } from 'apollo-client-preset'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import Firebase, { FirebaseContext } from './components/Firebase'
 
 const wsLink = new WebSocketLink({
   uri: 'wss://subscriptions.us-west-2.graph.cool/v1/cjs487hob3xfz0102pbvwvpje',
   options: {
-    reconnect: true
-  }
+    reconnect: true,
+  },
 })
 
 const httpLink = createHttpLink({
-  uri: 'https://api.graph.cool/simple/v1/cjs487hob3xfz0102pbvwvpje'
+  uri: 'https://api.graph.cool/simple/v1/cjs487hob3xfz0102pbvwvpje',
 })
 
 const link = split(
@@ -33,13 +34,15 @@ const link = split(
 
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 })
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <FirebaseContext.Provider value={new Firebase()}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </FirebaseContext.Provider>,
   document.getElementById('root')
 )
 
