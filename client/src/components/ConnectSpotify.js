@@ -16,7 +16,7 @@ const ConnectSpotify = () => {
       'playlist-read-private',
       'playlist-modify-public',
       'playlist-modify-private',
-      'user-read-playback-state'
+      'user-read-playback-state',
     ]
     return (
       'https://accounts.spotify.com/authorize?client_id=' +
@@ -31,9 +31,7 @@ const ConnectSpotify = () => {
   }
   return (
     <div className="Connect-spotify">
-      <p>
-        Connect your Spotify account so that Power Hour can control the music!
-      </p>
+      <p>Connect your Spotify account so that Power Hour can control the music!</p>
       <a href={redirectUrlToSpotifyForLogin()}>
         <Button variant="outlined" color="primary">
           Connect to Spotify

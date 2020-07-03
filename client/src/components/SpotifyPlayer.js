@@ -38,7 +38,7 @@ const SpotifyPlayer = ({ accessToken, time, frequency, start }) => {
         setSong({ name, artists, image })
       })
       spotifyAPI.setShuffle(shuffle, {})
-      if (start && !(time % (60 / frequency))) {
+      if (start && !Math.round((time - 1) % (60 / frequency))) {
         spotifyAPI.skipToNext()
         if (soundEffect) audio.play()
       }

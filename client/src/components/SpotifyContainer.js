@@ -22,11 +22,10 @@ const SpotifyContainer = ({ time, frequency, start }) => {
   }
   const getHashParams = () => {
     //helper function to parse the query string that spotify sends back when you log in
-    var hashParams = {}
-    var e,
+    const hashParams = {}
+    let e,
       r = /([^&;=]+)=?([^&;]*)/g,
       q = window.location.hash.substring(1)
-    // eslint-disable-next-line
     while ((e = r.exec(q))) {
       hashParams[e[1]] = decodeURIComponent(e[2])
     }
