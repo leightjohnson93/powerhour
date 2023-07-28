@@ -28,3 +28,17 @@ p {
   margin: 10px 30px;
   text-align: justify;
 }
+
+.gameId {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.gameId > h3 {
+  flex-shrink: 0;
+}
+
+.gameId > Button {
+  min-width: 10px
+}

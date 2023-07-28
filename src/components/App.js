@@ -19,6 +19,8 @@ import {
   faForward,
   faBackward,
   faInfoCircle,
+  faCopy,
+  faCheck
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay)
@@ -26,6 +28,8 @@ library.add(faPause)
 library.add(faForward)
 library.add(faBackward)
 library.add(faInfoCircle)
+library.add(faCopy)
+library.add(faCheck)
 
 const AppBase = ({ firebase }) => {
   const [frequency, setFrequency] = useState(1)
@@ -42,7 +46,6 @@ const AppBase = ({ firebase }) => {
 
   useEffect(() => {
     let path = window.location.pathname.split('/')[1]
-    console.log(path)
     if (path === 'callback') {
       path = localStorage.getItem('gameId')
     }
@@ -100,7 +103,6 @@ const AppBase = ({ firebase }) => {
           <Button
             variant="outlined"
             color="primary"
-            disabled={id.length === 4}
             type="submit"
             onClick={createGame}
           >
@@ -113,12 +115,12 @@ const AppBase = ({ firebase }) => {
             variant="outlined"
             margin="normal"
             value={id}
-            onChange={(e) => setId(e.target.value.toUpperCase())}
+            onChange={(e) => setId(e.target.value.toUpperCase().slice(0,4))}
           />
           <Button
             variant="outlined"
             color="primary"
-            disabled={!(id.length === 4)}
+            disabled={id.length !== 4}
             type="submit"
             onClick={() => joinGame(id)}
           >
@@ -141,10 +143,12 @@ const AppBase = ({ firebase }) => {
           startTime={startTime}
           setStartTime={setStartTime}
           id={id}
+          setId={setId}
+          setInGame={setInGame}
         />
       </Paper>
       <Paper className="Spotify-container">
-        <SpotifyContainer time={time} frequency={frequency} start={start} />
+        <SpotifyContainer next={start && !Math.round((time - 1) % (60 / frequency))} />
       </Paper>
       <Paper className="Players">
         <Players start={start} />

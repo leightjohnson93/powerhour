@@ -4,11 +4,12 @@ import './ConnectSpotify.css'
 
 const ConnectSpotify = () => {
   function redirectUrlToSpotifyForLogin() {
-    const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
+    const CLIENT_ID = "f8a2f26dc1804f3d9725f0c69311896f"
     const REDIRECT_URI =
       process.env.NODE_ENV === 'production'
         ? process.env.REACT_APP_SPOTIFY_PRODUCTION_REDIRECT_URI
         : process.env.REACT_APP_SPOTIFY_DEVELOPMENT_REDIRECT_URI
+        console.log(REDIRECT_URI)
     const scopes = [
       'user-modify-playback-state',
       'user-library-read',
