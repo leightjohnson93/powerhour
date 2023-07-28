@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { withFirebase } from './Firebase';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './PowerHour.css';
+import React, { useEffect, useState } from "react";
+import { withFirebase } from "./Firebase";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./PowerHour.css";
 
-const PowerHourBase = (props) => {
+const PowerHourBase = props => {
   const {
     frequency,
     duration,
@@ -23,7 +23,7 @@ const PowerHourBase = (props) => {
     firebase,
     setStartTime,
     startTime,
-    setInGame,
+    setInGame
   } = props;
 
   const [gameOver, setGameOver] = useState(false);
@@ -39,9 +39,9 @@ const PowerHourBase = (props) => {
   const formatSecondsUntilDrink = () => {
     const secondsUntilDrink = Math.round((time - 1) % (60 / frequency));
     if (secondsUntilDrink === null) {
-      return 'PowerHour';
+      return "PowerHour";
     } else if (secondsUntilDrink === 0) {
-      return 'DRINK!';
+      return "DRINK!";
     } else if (secondsUntilDrink > 0) {
       return secondsUntilDrink;
     }
@@ -85,7 +85,7 @@ const PowerHourBase = (props) => {
         <h3>Game ID: {id}</h3>
         <Tooltip title="Copy share link">
           <Button onClick={handleCopy}>
-            <FontAwesomeIcon icon={copied ? 'check' : 'copy'} />
+            <FontAwesomeIcon icon={copied ? "check" : "copy"} />
           </Button>
         </Tooltip>
       </div>
@@ -137,7 +137,7 @@ const PowerHourBase = (props) => {
               color="primary"
               size="large"
               disabled={frequency <= 0 || duration <= 0}
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 setStartTime(firebase.startGame(frequency, duration));
                 setStart(true);
@@ -149,7 +149,7 @@ const PowerHourBase = (props) => {
         </>
       )}
       <p>
-        Total Drinks:{' '}
+        Total Drinks:{" "}
         {parseFloat((frequency * duration).toString().slice(0, 6))}
       </p>
       <p>
@@ -157,7 +157,13 @@ const PowerHourBase = (props) => {
       </p>
       <p>
         {start && <Button onClick={() => setStart(false)}>End Game</Button>}
-        <Button onClick={() => {setInGame(false) }}>Join a different game</Button>
+        <Button
+          onClick={() => {
+            setInGame(false);
+          }}
+        >
+          Join a different game
+        </Button>
       </p>
     </>
   );

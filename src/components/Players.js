@@ -1,6 +1,6 @@
-import React from 'react';
-import Offline from './Offline';
-import './Players.css';
+import React from "react";
+import Offline from "./Offline";
+import "./Players.css";
 
 const Players = ({ start }) => (
   <div>

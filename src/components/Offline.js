@@ -1,46 +1,46 @@
-import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import getRandomEmoji from '../emojis'
-import './Players.css'
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import getRandomEmoji from "../emojis";
+import "./Players.css";
 
 const Offline = ({ start }) => {
-  const [newPlayer, setNewPlayer] = useState('')
-  const [players, setPlayers] = useState([])
+  const [newPlayer, setNewPlayer] = useState("");
+  const [players, setPlayers] = useState([]);
   const handleAdd = e => {
-    e.preventDefault()
-    const playerName = createPlayer()
+    e.preventDefault();
+    const playerName = createPlayer();
     if (playerName.length > 5) {
-      players.push(playerName)
-      setPlayers(players)
-      setNewPlayer('')
+      players.push(playerName);
+      setPlayers(players);
+      setNewPlayer("");
     }
-  }
+  };
 
   const createPlayer = () =>
     `${
-      newPlayer.toLowerCase().includes('alex') ||
-      newPlayer.toLowerCase().includes('fig')
-        ? '💩'
+      newPlayer.toLowerCase().includes("alex") ||
+      newPlayer.toLowerCase().includes("fig")
+        ? "💩"
         : getRandomEmoji()
-    } ${newPlayer} ${start ? '*' : ''}`
+    } ${newPlayer} ${start ? "*" : ""}`;
 
   const latePlayers = () => {
     for (let player of players) {
-      if (player.includes('*')) return <p>*Player added after Start of Game</p>
+      if (player.includes("*")) return <p>*Player added after Start of Game</p>;
     }
-  }
+  };
   return (
     <>
       <form className="player-input" autoComplete="off">
         <TextField
           type="text"
           label="Name"
-          placeholder={start ? 'Game In Progress' : ' Name'}
+          placeholder={start ? "Game In Progress" : " Name"}
           variant="outlined"
           margin="normal"
           value={newPlayer}
@@ -78,7 +78,7 @@ const Offline = ({ start }) => {
       </List>
       {latePlayers()}
     </>
-  )
-}
+  );
+};
 
-export default Offline
+export default Offline;

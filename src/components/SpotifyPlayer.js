@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import soundFile from '../dj-airhorn.mp3';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Slider from '@material-ui/core/Slider';
-import Grid from '@material-ui/core/Grid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './SpotifyPlayer.css'
+import React, { useState, useEffect } from "react";
+import soundFile from "../dj-airhorn.mp3";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Slider from "@material-ui/core/Slider";
+import Grid from "@material-ui/core/Grid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./SpotifyPlayer.css";
 
 const SpotifyPlayer = ({ next, spotifyAPI }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [playing, setPlaying] = useState(false);
   const [song, setSong] = useState({ name: null, artists: null, image: null });
   const [skips, setSkips] = useState(0);
@@ -42,15 +42,15 @@ const SpotifyPlayer = ({ next, spotifyAPI }) => {
   const getPlaybackState = async () => {
     const currentPlaybackState = await spotifyAPI.getMyCurrentPlaybackState();
     const { is_playing, item, shuffle_state } = currentPlaybackState;
-    if (!item) return { name: 'Nothing Playing' };
+    if (!item) return { name: "Nothing Playing" };
     const { name, artists, album } = item;
     const image = album.images[1].url;
     setShuffle(shuffle_state);
     setPlaying(is_playing);
     setSong({
       name,
-      artists: artists.map((artist) => artist.name).join(', '),
-      image,
+      artists: artists.map(artist => artist.name).join(", "),
+      image
     });
   };
 
@@ -70,9 +70,9 @@ const SpotifyPlayer = ({ next, spotifyAPI }) => {
     playing ? spotifyAPI.pause() : spotifyAPI.play();
     setPlaying(!playing);
   };
-  const handleSkip = async (e) => {
+  const handleSkip = async e => {
     const { id } = e.target;
-    id === 'next' ? spotifyAPI.skipToNext() : spotifyAPI.skipToPrevious();
+    id === "next" ? spotifyAPI.skipToNext() : spotifyAPI.skipToPrevious();
     if (soundEffect) audio.play();
     setPlaying(true);
     setTimeout(() => setSkips(skips + 1), 300);

@@ -39,6 +39,6 @@ p {
   flex-shrink: 0;
 }
 
-.gameId > Button {
-  min-width: 10px
+.gameId > button {
+  min-width: 10px;
 }
